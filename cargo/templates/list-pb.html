@@ -139,14 +139,16 @@ tr:hover {background-color: #D1D119;}
 <!--            <a href="{%url 'pb-add' %}" class="btn btn-info btn-sm"-->
 <!--               role="button">ADD TRADES</a>-->
 <!--        </div>-->
-                    <table class="table  table-primary table-hover bg-white able-condensed table-sm text-xsmall table-responsive w-auto" style="width: auto;" >
+                     <table class="table  table-primary table-hover bg-white able-condensed table-sm text-xsmall table-responsive w-auto" style="width: auto;" >
 
                         <thead>
                             <tr>
 <!--                                <th class="serial">No</th>-->
 
                                 <th>ID</th>
+
                                  <th>Actions</th>
+                                 <th>Trade Reference</th>
                                 <th>Date</th>
                                 <th>Trader</th>
                                 <th>Counter Party</th>
@@ -205,7 +207,8 @@ tr:hover {background-color: #D1D119;}
 <!--                                <td class="serial">{{ forloop.counter }}</td>-->
                                 <td>{{pb.ID}}</td>
 
-                                    <td>
+
+                                <td>
                                     <a href="{%url 'pb-details' pb.ID%}" class="btn btn-outline-info btn-sm"
                                        role="button"><i class='far fa-file'></i></a>
                                     <a href="{%url 'pb-edit' pb.ID%}" class="btn btn-outline-warning btn-sm"
@@ -215,7 +218,7 @@ tr:hover {background-color: #D1D119;}
                                        role="button"><i class="fa fa-trash"></i></a>
 
                                 </td>
-
+                                <td>{{pb.Trade_reference}}</td>
                                 <td>{{ pb.Date }}</td>
                                 <td>{{ pb.Trader }}</td>
                                  <td>{{ pb.Counter_Party }}</td>

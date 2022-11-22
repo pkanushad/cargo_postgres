@@ -48,13 +48,52 @@ class HolidayModel(models.Model):
     Singapore_Platts = models.DateField(default=datetime.now)
     ICE = models.DateField(default= datetime.now)
 
-
-
 class BookModel(models.Model):
     Book = models.CharField(max_length=100,null=True)
-
     def __str__(self):
         return self.Book
+
+class DerivativeModel(models.Model):
+    derivative = models.CharField(max_length=100,null=True)
+    def __str__(self):
+        return self.derivative
+
+class TypeModel(models.Model):
+    Spread = models.CharField(max_length=100,null=True)
+    Outright = models.CharField(max_length=100,null=True)
+    Swaps_swaps = models.CharField(max_length=100,null=True)
+    crack = models.CharField(max_length=100,null=True)
+
+class BrockersModel(models.Model):
+    brokers = models.CharField(max_length=100,null=True)
+    def __str__(self):
+        return self.brokers
+
+
+class ClearerModel(models.Model):
+    clearer = models.CharField(max_length=100,null=True)
+    def __str__(self):
+        return self.clearer
+
+class ClearerRatesModel(models.Model):
+    clearer = models.ForeignKey(ClearerModel, on_delete=models.CASCADE)
+    derivative = models.ForeignKey(DerivativeModel, on_delete=models.CASCADE)
+    contract = models.CharField(max_length=100,null=True)
+    clearer_cost = models.IntegerField(null=True)
+    exchange_cost = models.IntegerField(null=True)
+    unit = models.CharField(max_length=100,null=True)
+
+class BrokerageModel(models.Model):
+    contract = models.ForeignKey(DerivativeModel, on_delete=models.CASCADE)
+    APPLYMODE_CHOICE = (
+        ("start ", "start"),
+        ("only for", "only for"),
+    )
+    Applymode = models.CharField(max_length=100,choices=APPLYMODE_CHOICE,default="select")
+    select_brocker = models.ForeignKey(BrockersModel, on_delete=models.CASCADE)
+    brokerage = models.IntegerField(null=True)
+
+
 
 
 # main model
@@ -170,7 +209,7 @@ class PhysicalBlotter(models.Model):
         ("Closed", "Closed"),
     )
     Status = models.CharField(max_length=120, choices=STATUS_CHOICES, null=True, blank=True, default="Open")
-
+    Trade_reference = models.CharField(max_length=120, null=True, blank=True)
     # def __str__(self):
     #     return self.Trader
 

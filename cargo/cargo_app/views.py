@@ -23,6 +23,7 @@ import datetime as dt
 from datetime import datetime
 from django.db.models import Q
 import csv
+import random
 
 # Create your views here.
 
@@ -120,6 +121,23 @@ class PhysicalblotterCreateView(View):
             end_date = form.cleaned_data.get('end_date')
             date_ = form.cleaned_data.get("Date")
             trader_ = form.cleaned_data.get("Trader")
+
+            counter_party = form.cleaned_data.get("Counter_Party")
+            cargo_ = form.cleaned_data.get("Product")
+            print("counter_party:", counter_party)
+            print("cargo_:", cargo_)
+
+            counter_cargo = str(counter_party) + str(cargo_)
+            print("counter_cargo", counter_cargo)
+            randint_ = str(random.randint(1000, 99999))
+            # rand = random.randint(0,1000000)
+            print("random number:", randint_)
+            Trade_ref = counter_cargo + randint_
+            print("final rand:", Trade_ref)
+            instance = form.save(commit=False)
+            instance.Trade_reference = Trade_ref
+            instance.save()
+
             # workingdays = np.busday_count(start_date, end_date, holidays=singapore_holiday)+1
             print("startdate:",start_date)
             print("enddate:",end_date)
